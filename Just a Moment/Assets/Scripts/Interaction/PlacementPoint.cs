@@ -5,7 +5,10 @@ public class PlacementPoint : MonoBehaviour
     public int timeLine;
     public Interactable startingObject;
     [SerializeField] private Collider[] placementColliders = new Collider[0];
+    public bool lockObjectIn;
     public string[] placementTags = new string[0];
+
+    [HideInInspector] public bool completed = false;
 
     void Start()
     {
@@ -27,5 +30,26 @@ public class PlacementPoint : MonoBehaviour
         {
             _collider.enabled = _collisionOn;
         }
+    }
+
+    public bool CheckPlacementAbility(Interactable _object)
+    {
+        if(placementTags.Length <= 0)
+        {
+            return true;
+        }
+        foreach (string _tag in placementTags)
+        {
+            if(_tag == _object.placementTag)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public void CompletePoint(bool _completion)
+    {
+        completed = _completion;
     }
 }

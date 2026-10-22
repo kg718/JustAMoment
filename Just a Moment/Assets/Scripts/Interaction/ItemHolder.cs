@@ -28,7 +28,10 @@ public class ItemHolder : MonoBehaviour
             {
                 if(_hit.collider.TryGetComponent<Interactable>(out Interactable _object))
                 {
-                    UpdateInteractionTarget(_object);
+                    if(_object.interactable)
+                    {
+                        UpdateInteractionTarget(_object);
+                    }
                 } 
 
             }
@@ -36,10 +39,17 @@ public class ItemHolder : MonoBehaviour
             {
                 heldItem.SetPlacementGhost(_hit.collider.transform);
                 UpdateInteractionTarget(emptyInteraction);
-                //if (_hit.collider.TryGetComponent<PlacementPoint>(out PlacementPoint _placement))
-                //{
-
-                //}
+                if (_hit.collider.TryGetComponent<PlacementPoint>(out PlacementPoint _placement))
+                {
+                    if(_placement.CheckPlacementAbility(heldItem))
+                    {
+                        heldItem.SetGhostMaterial(MaterialManager.Instance.ghostMat);
+                    }
+                    else
+                    {
+                        heldItem.SetGhostMaterial(MaterialManager.Instance.wrongGhostMat);
+                    }
+                }
             }
             else
             {
@@ -69,24 +79,37 @@ public class ItemHolder : MonoBehaviour
             {
                 if (_hit.collider.gameObject.TryGetComponent<Interactable>(out Interactable _object))
                 {
-                    _object.SetHoldPoint(transform);
-                    _object.SetCollision(false);
-                    heldItem = _object;
-                    heldItem.transform.parent = null;
-                    holdingItem = true;
+                    if (_object.interactable)
+                    {
+                        _object.SetHoldPoint(transform);
+                        _object.SetCollision(false);
+                        heldItem = _object;
+                        heldItem.transform.parent = null;
+                        holdingItem = true;
+                    }
                 }
             }
             else if (holdingItem && _hit.collider.gameObject.layer == LayerMask.NameToLayer("Placement"))
             {
                 if (_hit.collider.gameObject.TryGetComponent<PlacementPoint>(out PlacementPoint _placement))
                 {
-                    heldItem.SetHoldPoint(_placement.transform);
-                    //_placement.SetCollision(false);
-                    heldItem.SetCollision(true);
-                    heldItem.transform.parent = TimeLineManager.instance.timelines[TimeLineManager.instance.currentTimeline].transform;
-                    heldItem.ResetPlacementGhost();
-                    heldItem = null;
-                    holdingItem = false;
+                    _placement.CompletePoint(true);
+                    //temp
+                    TimeLineManager.instance.CheckLevelCompletion();
+                    if(_placement.CheckPlacementAbility(heldItem))
+                    {
+                        heldItem.SetHoldPoint(_placement.transform);
+                        //_placement.SetCollision(false);
+                        heldItem.SetCollision(true);
+                        heldItem.transform.parent = TimeLineManager.instance.timelines[TimeLineManager.instance.currentTimeline].transform;
+                        heldItem.ResetPlacementGhost();
+                        if(_placement.lockObjectIn)
+                        {
+                            heldItem.interactable = false;
+                        }
+                        heldItem = null;
+                        holdingItem = false;
+                    }
                 }
             }
         }

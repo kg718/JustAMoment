@@ -7,6 +7,7 @@ public class TimeLineManager : MonoBehaviour
 
     public GameObject[] timelines = new GameObject[0];
     [HideInInspector] public int currentTimeline = 0;
+    [SerializeField] private PlacementPoint[] requiredPlacements = new PlacementPoint[0];
 
     [SerializeField] private TextMeshProUGUI timelineText;
 
@@ -45,5 +46,19 @@ public class TimeLineManager : MonoBehaviour
         {
             timelineText.text = "Timeline: " + currentTimeline;
         }
+    }
+
+    public int CheckLevelCompletion()
+    {
+        int _completion = 0;
+        foreach (PlacementPoint _placement in requiredPlacements)
+        {
+            if(_placement.completed)
+            {
+                _completion++;
+            }
+        }
+        print(_completion + " / " + requiredPlacements.Length);
+        return _completion;
     }
 }
