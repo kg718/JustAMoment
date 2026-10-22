@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class PlacementPoint : ItemHolder
+public class PlacementPoint : MonoBehaviour
 {
     public int timeLine;
     public Interactable startingObject;
