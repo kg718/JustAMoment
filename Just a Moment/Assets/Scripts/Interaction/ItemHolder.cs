@@ -84,6 +84,7 @@ public class ItemHolder : MonoBehaviour
                     //_placement.SetCollision(false);
                     heldItem.SetCollision(true);
                     heldItem.transform.parent = TimeLineManager.instance.timelines[TimeLineManager.instance.currentTimeline].transform;
+                    heldItem.ResetPlacementGhost();
                     heldItem = null;
                     holdingItem = false;
                 }
@@ -93,6 +94,7 @@ public class ItemHolder : MonoBehaviour
 
     public void OnDrop()
     {
+        if (!holdingItem) return;
         Physics.Raycast(transform.position, Vector3.down, out RaycastHit _hit);
         Vector3 _dir = _hit.point - rayCastOrigin.position;
         _dir = new Vector3(_dir.x, _hit.point.y, _dir.z).normalized;
@@ -110,6 +112,7 @@ public class ItemHolder : MonoBehaviour
             heldItem.transform.position = new Vector3(_hit.point.x, _hit.point.y + heldItem.size / 2f, _hit.point.z) ;
         }
         heldItem.transform.localRotation = Quaternion.identity;
+        heldItem.ResetPlacementGhost();
         heldItem = null;
         holdingItem = false;
     }
