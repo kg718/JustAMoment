@@ -32,24 +32,32 @@ public class ItemHolder : MonoBehaviour
                 } 
 
             }
+            else if (_hit.collider.gameObject.layer == LayerMask.NameToLayer("Placement") && holdingItem)
+            {
+                heldItem.SetPlacementGhost(_hit.collider.transform);
+                UpdateInteractionTarget(emptyInteraction);
+                //if (_hit.collider.TryGetComponent<PlacementPoint>(out PlacementPoint _placement))
+                //{
+
+                //}
+            }
             else
             {
                 UpdateInteractionTarget(emptyInteraction);
+                if(holdingItem)
+                {
+                    heldItem.ResetPlacementGhost();
+                }
             }
 
-            //if (!holdingItem && _hit.collider.gameObject.layer == LayerMask.NameToLayer("PickUp"))
-            //{
-            //    if (_hit.collider.gameObject == interactionTarget.gameObject) return;
-            //    if (_hit.collider.gameObject.TryGetComponent<Interactable>(out Interactable _object))
-            //    {
-            //        interactionTarget = _object;
-            //        interactionTarget.SetOutline(true);
-            //    }
-            //}
         }
         else
         {
             UpdateInteractionTarget(emptyInteraction);
+            if(holdingItem)
+            {
+                heldItem.ResetPlacementGhost();
+            }
         }
     }
 
@@ -73,6 +81,8 @@ public class ItemHolder : MonoBehaviour
                 if (_hit.collider.gameObject.TryGetComponent<PlacementPoint>(out PlacementPoint _placement))
                 {
                     heldItem.SetHoldPoint(_placement.transform);
+                    //_placement.SetCollision(false);
+                    heldItem.SetCollision(true);
                     heldItem.transform.parent = TimeLineManager.instance.timelines[TimeLineManager.instance.currentTimeline].transform;
                     heldItem = null;
                     holdingItem = false;
@@ -99,6 +109,7 @@ public class ItemHolder : MonoBehaviour
         {
             heldItem.transform.position = new Vector3(_hit.point.x, _hit.point.y + heldItem.size / 2f, _hit.point.z) ;
         }
+        heldItem.transform.localRotation = Quaternion.identity;
         heldItem = null;
         holdingItem = false;
     }

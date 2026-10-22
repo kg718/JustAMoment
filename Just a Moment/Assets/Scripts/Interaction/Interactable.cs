@@ -7,6 +7,8 @@ public class Interactable : MonoBehaviour
     public float size;
     [SerializeField] private Collider[] objectColliders = new Collider[0];
     [SerializeField] private GameObject[] outlineObjects = new GameObject[0];
+    [SerializeField] private GameObject ghostObject;
+    public string[] placementTags = new string[0];
 
     void Start()
     {
@@ -23,6 +25,20 @@ public class Interactable : MonoBehaviour
     public void SetHoldPoint(Transform _holdPoint)
     {
         holdPoint = _holdPoint;
+    }
+
+    public void SetPlacementGhost(Transform _ghostPoint)
+    {
+        if (ghostObject == null) return;
+        ghostObject.SetActive(true);
+        ghostObject.transform.position = _ghostPoint.position;
+        ghostObject.transform.rotation = _ghostPoint.rotation;
+    }
+
+    public void ResetPlacementGhost()
+    {
+        if(ghostObject == null) return;
+        ghostObject.SetActive(false);
     }
 
     public void ResetHoldPoint()

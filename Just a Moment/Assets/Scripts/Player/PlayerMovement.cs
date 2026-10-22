@@ -12,11 +12,15 @@ public class PlayerMovement : MonoBehaviour
     private bool grounded = false;
     [SerializeField] private float groundDetectionDistance;
     [SerializeField] private float fallSpeed;
+    private Animator playerAnimator;
+
+    private string currentAnimationTrigger = "";
 
     void Start()
     {
         rb = GetComponent<Rigidbody>();
         rb.freezeRotation = true;
+        playerAnimator = GetComponent<Animator>();
     }
 
 
@@ -44,5 +48,19 @@ public class PlayerMovement : MonoBehaviour
     {
         movDir = orientation.forward * inputDir.y + orientation.right * inputDir.x;
         rb.AddForce(movDir.normalized * moveSpeed, ForceMode.Force);
+        if(movDir.magnitude <= 0.2f)
+        {
+            SetAnimation("StopWalking");
+        }
+        else
+        {
+            SetAnimation("StartWalking");
+        }
+    }
+
+    private void SetAnimation(string _animation)
+    {
+        if (_animation == currentAnimationTrigger) return;
+        playerAnimator.SetTrigger(_animation);
     }
 }

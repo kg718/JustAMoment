@@ -4,6 +4,8 @@ public class PlacementPoint : ItemHolder
 {
     public int timeLine;
     public Interactable startingObject;
+    [SerializeField] private Collider[] placementColliders = new Collider[0];
+    public string[] placementTags = new string[0];
 
     void Start()
     {
@@ -15,6 +17,15 @@ public class PlacementPoint : ItemHolder
 
     void Update()
     {
-        
+
+    }
+
+    public void SetCollision(bool _collisionOn)
+    {
+        if (placementColliders.Length <= 0) return;
+        foreach (Collider _collider in placementColliders)
+        {
+            _collider.enabled = _collisionOn;
+        }
     }
 }
