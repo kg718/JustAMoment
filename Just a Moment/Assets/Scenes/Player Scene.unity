@@ -24,7 +24,7 @@ RenderSettings:
   m_AmbientEquatorColor: {r: 0.114, g: 0.125, b: 0.133, a: 1}
   m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
   m_AmbientIntensity: 1
-  m_AmbientMode: 0
+  m_AmbientMode: 4
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
   m_SkyboxMaterial: {fileID: 0}
   m_HaloStrength: 0.5
@@ -260,7 +260,6 @@ GameObject:
   - component: {fileID: 371898762}
   - component: {fileID: 371898761}
   - component: {fileID: 371898760}
-  - component: {fileID: 371898763}
   - component: {fileID: 371898764}
   - component: {fileID: 371898765}
   - component: {fileID: 371898766}
@@ -346,18 +345,6 @@ Transform:
   - {fileID: 326091320}
   m_Father: {fileID: 145673856}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &371898763
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 371898759}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a79441f348de89743a2939f4d699eac1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &371898764
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -370,7 +357,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0783e0db2154c944b83d984abdef0f3b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  camSensitivity: 80
+  camSensitivity: 150
   orientation: {fileID: 1453174897}
 --- !u!114 &371898765
 MonoBehaviour:

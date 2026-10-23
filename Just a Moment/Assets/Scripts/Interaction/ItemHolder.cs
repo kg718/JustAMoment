@@ -98,8 +98,7 @@ public class ItemHolder : MonoBehaviour
             {
                 if (_hit.collider.gameObject.TryGetComponent<PlacementPoint>(out PlacementPoint _placement))
                 {
-                    _placement.CompletePoint(true);
-                    TimeLineManager.instance.CheckLevelCompletion();
+
                     if(_placement.CheckPlacementAbility(heldItem))
                     {
                         heldItem.SetHoldPoint(_placement.transform);
@@ -108,7 +107,9 @@ public class ItemHolder : MonoBehaviour
                         heldItem.transform.parent = TimeLineManager.instance.timelines[TimeLineManager.instance.currentTimeline].transform;
                         heldItem.ResetPlacementGhost();
                         heldItem.currentPlacement = _placement;
-                        if(_placement.lockObjectIn)
+                        _placement.CompletePoint(true);
+                        TimeLineManager.instance.CheckLevelCompletion();
+                        if (_placement.lockObjectIn)
                         {
                             heldItem.interactable = false;
                         }
