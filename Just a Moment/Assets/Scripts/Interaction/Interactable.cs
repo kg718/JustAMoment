@@ -8,14 +8,14 @@ public class Interactable : MonoBehaviour
     public bool interactable = true;
     [SerializeField] private Collider[] objectColliders = new Collider[0];
     [SerializeField] private GameObject[] outlineObjects = new GameObject[0];
-    [SerializeField] private GameObject ghostObject;
+    [SerializeField] private MeshRenderer[] ghostObjects = new MeshRenderer[0];
     public string placementTag;
 
     [HideInInspector] public PlacementPoint currentPlacement;
 
     void Start()
     {
-        
+        ResetPlacementGhost();
     }
 
     void Update()
@@ -32,16 +32,22 @@ public class Interactable : MonoBehaviour
 
     public void SetPlacementGhost(Transform _ghostPoint)
     {
-        if (ghostObject == null) return;
-        ghostObject.SetActive(true);
-        ghostObject.transform.position = _ghostPoint.position;
-        ghostObject.transform.rotation = _ghostPoint.rotation;
+        if (ghostObjects.Length <= 0) return;
+        foreach (Renderer _renderer in ghostObjects)
+        {
+            _renderer.enabled = true;
+        }
+        ghostObjects[0].transform.position = _ghostPoint.position;
+        ghostObjects[0].transform.rotation = _ghostPoint.rotation;
     }
 
     public void ResetPlacementGhost()
     {
-        if(ghostObject == null) return;
-        ghostObject.SetActive(false);
+        if(ghostObjects.Length <= 0) return;
+        foreach (Renderer _renderer in ghostObjects)
+        {
+            _renderer.enabled = false;
+        }
     }
 
     public void ResetHoldPoint()
@@ -69,7 +75,10 @@ public class Interactable : MonoBehaviour
 
     public void SetGhostMaterial(Material _material)
     {
-        if(ghostObject == null) return;
-        ghostObject.GetComponent<MeshRenderer>().material = _material;
+        if(ghostObjects.Length <= 0) return;
+        foreach(Renderer _renderer in ghostObjects)
+        {
+            _renderer.material = _material;
+        }
     }
 }
