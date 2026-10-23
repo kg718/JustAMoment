@@ -4,8 +4,8 @@ public class PlacementPoint : MonoBehaviour
 {
     public int timeLine;
     public Interactable startingObject;
-    [SerializeField] private Collider[] placementColliders = new Collider[0];
     public bool lockObjectIn;
+    [SerializeField] private Collider[] placementColliders = new Collider[0];
     public string[] placementTags = new string[0];
 
     [HideInInspector] public bool completed = false;

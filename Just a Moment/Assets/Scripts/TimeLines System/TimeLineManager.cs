@@ -59,6 +59,7 @@ public class TimeLineManager : MonoBehaviour
             }
         }
         print(_completion + " / " + requiredPlacements.Length);
+        HUD.instance.UpdateCompletionDisplay(_completion, requiredPlacements.Length);
         return _completion;
     }
 }

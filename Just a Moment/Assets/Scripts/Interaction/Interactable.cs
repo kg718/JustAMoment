@@ -11,6 +11,8 @@ public class Interactable : MonoBehaviour
     [SerializeField] private GameObject ghostObject;
     public string placementTag;
 
+    [HideInInspector] public PlacementPoint currentPlacement;
+
     void Start()
     {
         
