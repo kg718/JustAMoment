@@ -18,7 +18,7 @@ public class LevelFinishMenu : MonoBehaviour
 
     public void ActivateFinishPanel()
     {
-        menu.SetActive(false);
+        menu.SetActive(true);
     }
 
     public void OnClickReturnToMenu()

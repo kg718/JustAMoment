@@ -12,6 +12,9 @@ public class ItemHolder : MonoBehaviour
     private Interactable interactionTarget;
     private Interactable emptyInteraction;
 
+    [SerializeField] private AudioClip placeSound;
+    [SerializeField] private GameObject placeEffects;
+
     void Start()
     {
         emptyInteraction = new Interactable();
@@ -51,10 +54,17 @@ public class ItemHolder : MonoBehaviour
                     }
                 }
             }
+            else if (_hit.collider.gameObject.layer == LayerMask.NameToLayer("Changeable") && holdingItem)
+            {
+                if (_hit.collider.TryGetComponent<ChangeInteraction>(out ChangeInteraction _changer))
+                {
+
+                }
+            }
             else
             {
                 UpdateInteractionTarget(emptyInteraction);
-                if(holdingItem)
+                if (holdingItem)
                 {
                     heldItem.ResetPlacementGhost();
                 }
@@ -84,6 +94,10 @@ public class ItemHolder : MonoBehaviour
                         _object.SetHoldPoint(transform);
                         _object.SetCollision(false);
                         heldItem = _object;
+                        if (heldItem.pickUpSound != null)
+                        {
+                            SoundEffectManager.Instance.PlaySoundEffect(heldItem.pickUpSound, 0.8f, 1.1f);
+                        }
                         heldItem.transform.parent = null;
                         holdingItem = true;
                         if(_object.currentPlacement != null)
@@ -98,9 +112,10 @@ public class ItemHolder : MonoBehaviour
             {
                 if (_hit.collider.gameObject.TryGetComponent<PlacementPoint>(out PlacementPoint _placement))
                 {
-
                     if(_placement.CheckPlacementAbility(heldItem))
                     {
+                        SoundEffectManager.Instance.PlaySoundEffect(placeSound);
+                        Instantiate(placeEffects, _hit.collider.transform.position, Quaternion.identity);
                         heldItem.SetHoldPoint(_placement.transform);
                         //_placement.SetCollision(false);
                         heldItem.SetCollision(true);
@@ -108,6 +123,10 @@ public class ItemHolder : MonoBehaviour
                         heldItem.ResetPlacementGhost();
                         heldItem.currentPlacement = _placement;
                         _placement.CompletePoint(true);
+                        if (heldItem.placeSound != null)
+                        {
+                            SoundEffectManager.Instance.PlaySoundEffect(heldItem.placeSound, 0.8f, 1.1f);
+                        }
                         TimeLineManager.instance.CheckLevelCompletion();
                         if (_placement.lockObjectIn)
                         {
@@ -116,6 +135,13 @@ public class ItemHolder : MonoBehaviour
                         heldItem = null;
                         holdingItem = false;
                     }
+                }
+            }
+            else if (holdingItem && _hit.collider.gameObject.layer == LayerMask.NameToLayer("Changeable"))
+            {
+                if (_hit.collider.gameObject.TryGetComponent<ChangeInteraction>(out ChangeInteraction _changer))
+                {
+                    _changer.Change(heldItem);
                 }
             }
         }
@@ -138,7 +164,7 @@ public class ItemHolder : MonoBehaviour
         }
         else
         {
-            heldItem.transform.position = new Vector3(_hit.point.x, _hit.point.y + heldItem.size / 2f, _hit.point.z) ;
+            heldItem.transform.position = new Vector3(_hit.point.x, _hit.point.y + heldItem.size / 2f, _hit.point.z);
         }
         heldItem.transform.localRotation = Quaternion.identity;
         heldItem.ResetPlacementGhost();

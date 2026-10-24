@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Interactable : MonoBehaviour
 {
@@ -9,7 +10,12 @@ public class Interactable : MonoBehaviour
     [SerializeField] private Collider[] objectColliders = new Collider[0];
     [SerializeField] private GameObject[] outlineObjects = new GameObject[0];
     [SerializeField] private MeshRenderer[] ghostObjects = new MeshRenderer[0];
+    [SerializeField] private GameObject ghostParent;
+    public AudioClip pickUpSound;
+    public AudioClip placeSound;
     public string placementTag;
+    public string changeTag = "None";
+    public UnityEvent OnChange;
 
     [HideInInspector] public PlacementPoint currentPlacement;
 
@@ -37,8 +43,8 @@ public class Interactable : MonoBehaviour
         {
             _renderer.enabled = true;
         }
-        ghostObjects[0].transform.position = _ghostPoint.position;
-        ghostObjects[0].transform.rotation = _ghostPoint.rotation;
+        ghostParent.transform.position = _ghostPoint.position;
+        ghostParent.transform.rotation = _ghostPoint.rotation;
     }
 
     public void ResetPlacementGhost()
