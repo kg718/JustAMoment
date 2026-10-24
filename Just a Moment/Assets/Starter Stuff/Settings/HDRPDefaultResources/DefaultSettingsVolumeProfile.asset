@@ -152,7 +152,7 @@ MonoBehaviour:
   active: 1
   rotation:
     m_OverrideState: 0
-    m_Value: 0
+    m_Value: 76.3
   skyIntensityMode:
     m_OverrideState: 0
     m_Value: 0
@@ -352,7 +352,7 @@ MonoBehaviour:
     m_OverrideState: 1
     m_Value: 1
   meteringMode:
-    m_OverrideState: 0
+    m_OverrideState: 1
     m_Value: 2
   luminanceSource:
     m_OverrideState: 0
@@ -365,7 +365,7 @@ MonoBehaviour:
     m_Value: 0
   limitMin:
     m_OverrideState: 0
-    m_Value: -10
+    m_Value: -3.1331952
   limitMax:
     m_OverrideState: 0
     m_Value: 10
@@ -507,7 +507,7 @@ MonoBehaviour:
     m_Value: 0
   intensity:
     m_OverrideState: 1
-    m_Value: 0.5
+    m_Value: 0.465
   directLightingStrength:
     m_OverrideState: 0
     m_Value: 0
@@ -557,7 +557,7 @@ MonoBehaviour:
     m_Value: 2
   m_RayLength:
     m_OverrideState: 0
-    m_Value: 3
+    m_Value: 1
   m_SampleCount:
     m_OverrideState: 0
     m_Value: 2
