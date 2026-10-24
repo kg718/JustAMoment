@@ -54,10 +54,17 @@ public class ItemHolder : MonoBehaviour
                     }
                 }
             }
+            else if (_hit.collider.gameObject.layer == LayerMask.NameToLayer("Changeable") && holdingItem)
+            {
+                if (_hit.collider.TryGetComponent<ChangeInteraction>(out ChangeInteraction _changer))
+                {
+
+                }
+            }
             else
             {
                 UpdateInteractionTarget(emptyInteraction);
-                if(holdingItem)
+                if (holdingItem)
                 {
                     heldItem.ResetPlacementGhost();
                 }
