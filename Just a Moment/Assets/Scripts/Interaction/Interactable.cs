@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Interactable : MonoBehaviour
 {
@@ -9,7 +10,11 @@ public class Interactable : MonoBehaviour
     [SerializeField] private Collider[] objectColliders = new Collider[0];
     [SerializeField] private GameObject[] outlineObjects = new GameObject[0];
     [SerializeField] private MeshRenderer[] ghostObjects = new MeshRenderer[0];
+    public AudioClip pickUpSound;
+    public AudioClip placeSound;
     public string placementTag;
+    public string changeTag = "None";
+    public UnityEvent OnChange;
 
     [HideInInspector] public PlacementPoint currentPlacement;
 

@@ -60,7 +60,7 @@ public class TimeLineManager : MonoBehaviour
         }
         print(_completion + " / " + requiredPlacements.Length);
         HUD.instance.UpdateCompletionDisplay(_completion, requiredPlacements.Length);
-        if (_completion == requiredPlacements.Length)
+        if (_completion >= requiredPlacements.Length)
         {
             LevelFinishMenu.Instance.ActivateFinishPanel();
         }
