@@ -987,8 +987,8 @@
     "m_ObjectId": "94c24412099c42f58e6ae62a30a21532",
     "m_Title": "Create a Zero to One gradient using Offset and Distance",
     "m_Position": {
-        "x": -203.199951171875,
-        "y": -0.800048828125
+        "x": -203.20001220703126,
+        "y": -0.79998779296875
     }
 }
 
@@ -1247,8 +1247,8 @@
     "m_ObjectId": "fa03f7478fae430d8246cc0a3f5f1154",
     "m_Title": "Measure the distance from the camera to pixel",
     "m_Position": {
-        "x": -858.39990234375,
-        "y": -21.60009765625
+        "x": -858.4000244140625,
+        "y": -21.59991455078125
     }
 }
 
