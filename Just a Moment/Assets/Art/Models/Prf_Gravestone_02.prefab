@@ -58,10 +58,25 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -1369656119255913607, guid: 2f179ee4e64aac64599f4265cf578ee8,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 2f179ee4e64aac64599f4265cf578ee8,
         type: 3}
       propertyPath: m_Name
       value: Prf_Gravestone_02
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 2f179ee4e64aac64599f4265cf578ee8,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7299524373461646872, guid: 2f179ee4e64aac64599f4265cf578ee8,
+        type: 3}
+      propertyPath: m_StaticShadowCaster
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7299524373461646872, guid: 2f179ee4e64aac64599f4265cf578ee8,
         type: 3}
